@@ -13,8 +13,11 @@ import { ToastController, LoadingController } from '@ionic/angular';
 
 export class RegisterPage {
 
+  nome= '';
   email = '';
   senha = '';
+  tipo_usuario= '';
+
 
   constructor(
     private authServide: AuthService,

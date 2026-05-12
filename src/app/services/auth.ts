@@ -9,8 +9,8 @@ export class AuthService {
 
   constructor(private auth: Auth){}
 
-  login(email: string, senha: string){
-    return signInWithEmailAndPassword(this.auth, email, senha);
+  login( email: string, senha: string, ){
+    return signInWithEmailAndPassword(this.auth,  email, senha, );
   }
 
   register(email: string, senha: string){

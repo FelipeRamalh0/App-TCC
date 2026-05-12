@@ -19,16 +19,27 @@ const routes: Routes = [
         path: 'tab3',
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
+
       {
         path: '',
-        redirectTo: '../pages/login',
+        redirectTo: 'login',
         pathMatch: 'full'
       }
     ]
   },
   {
+    path: 'login',
+    loadChildren: () =>
+      import('../pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('../pages/register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
     path: '',
-    redirectTo: '../pages/login',
+    redirectTo: 'login',
     pathMatch: 'full'
   }
 ];
@@ -36,4 +47,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

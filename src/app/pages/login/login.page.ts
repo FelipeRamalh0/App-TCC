@@ -6,18 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  IonItem,
-  IonLabel,
-  IonInput,
-  IonButton,
-  IonRouterLink,
 
-} from '@ionic/angular/standalone';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -26,17 +15,6 @@ import {
     imports: [
     CommonModule,
     FormsModule,
-
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonItem,
-    IonLabel,
-    IonInput,
-    IonButton,
-    IonRouterLink,
-
     RouterLink,
   ]
 })
@@ -79,7 +57,7 @@ export class LoginPage {
   async loginGitHub() {
     try {
       await this.authService.loginWithGitHub();
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('../../tab1');
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.presentToast('Erro ao logar com Google: ' + error.message, 'danger')
