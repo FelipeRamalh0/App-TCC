@@ -1,0 +1,112 @@
+<ion-app>
+
+  <!-- MENU LATERAL -->
+  <ion-menu contentId="main-content" type="overlay">
+
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>FirstStepDev</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+
+      <!-- PERFIL -->
+      <div class="perfil-container">
+
+        <ion-avatar>
+          <img src="https://i.pravatar.cc/150?img=3" />
+        </ion-avatar>
+
+        <h2>Ramalho</h2>
+        <p>Desenvolvedor Iniciante</p>
+
+      </div>
+
+      <!-- ITENS MENU -->
+      <ion-list>
+
+        <ion-item routerLink="/home">
+          <ion-icon name="home-outline" slot="start"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/tarefas">
+          <ion-icon name="folder-outline" slot="start"></ion-icon>
+          <ion-label>Tarefas</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/chat">
+          <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
+          <ion-label>Chat</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/mentorias">
+          <ion-icon name="book-outline" slot="start"></ion-icon>
+          <ion-label>Mentorias</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/portfolio">
+          <ion-icon name="briefcase-outline" slot="start"></ion-icon>
+          <ion-label>Portfólio</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/perfil">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/notificacoes">
+          <ion-icon name="notifications-outline" slot="start"></ion-icon>
+          <ion-label>Notificações</ion-label>
+        </ion-item>
+
+        <ion-item routerLink="/configuracoes">
+          <ion-icon name="settings-outline" slot="start"></ion-icon>
+          <ion-label>Configurações</ion-label>
+        </ion-item>
+
+      </ion-list>
+
+    </ion-content>
+
+  </ion-menu>
+
+  <!-- CONTEÚDO -->
+  <div class="ion-page" id="main-content">
+
+    <ion-header>
+      <ion-toolbar>
+
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+        <ion-title>Dashboard</ion-title>
+
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+
+      <h1>Bem-vindo ao FirstStepDev 🚀</h1>
+
+      <ion-card>
+
+        <ion-card-header>
+          <ion-card-title>
+            Plataforma de aprendizado prático
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          Explore tarefas, mentorias e evolua suas habilidades.
+        </ion-card-content>
+
+      </ion-card>
+
+    </ion-content>
+
+  </div>
+
+</ion-app>
