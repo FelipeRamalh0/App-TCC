@@ -1,24 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+// settings.page.ts
+
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
-  selector: 'app-configuracoes',
+  selector: 'app-settings',
   templateUrl: './configuracoes.page.html',
   styleUrls: ['./configuracoes.page.scss'],
   standalone: true,
-   imports: [
+  imports: [
     CommonModule,
     FormsModule,
     IonicModule
   ]
 })
-export class ConfiguracoesPage implements OnInit {
+export class ConfiguracoesPage {
 
-  constructor() { }
+  darkMode = true;
 
-  ngOnInit() {
-  }
+  emailNotifications = true;
+
+  pushNotifications = true;
+
+  feedbackNotifications = true;
+
+  progressNotifications = true;
 
 }

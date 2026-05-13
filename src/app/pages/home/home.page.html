@@ -1,13 +1,173 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="home-content">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- HEADER -->
+  <div class="header">
+
+    <div class="logo-container">
+
+      <div class="logo-icon">
+        <ion-icon name="code-slash-outline"></ion-icon>
+      </div>
+
+      <h1>First Step Dev</h1>
+
+    </div>
+
+    <!-- SEARCH -->
+    <ion-searchbar
+      placeholder="Buscar desafios ou tecnologias..."
+      [(ngModel)]="searchQuery"
+      (ionInput)="filterTasks()"
+      color="dark"
+      animated="true">
+    </ion-searchbar>
+
+  </div>
+
+  <!-- GREETING -->
+  <div class="greeting">
+
+    <h2>Olá, Desenvolvedor 👋</h2>
+
+    <p>
+      Explore desafios reais e desenvolva suas habilidades
+    </p>
+
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-grid">
+
+    <ion-card class="stat-card blue">
+      <ion-card-content>
+
+        <h1>12</h1>
+
+        <p>Concluídos</p>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stat-card purple">
+      <ion-card-content>
+
+        <h1>3</h1>
+
+        <p>Em progresso</p>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="stat-card dark">
+      <ion-card-content>
+
+        <h1>45</h1>
+
+        <p>Pontos</p>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <!-- TASKS -->
+  <div class="section-title">
+
+    <h3>Desafios Disponíveis</h3>
+
+    <span>Ver todos</span>
+
+  </div>
+
+  <!-- TASK CARD -->
+  <ion-card
+    *ngFor="let task of filteredTasks"
+    class="task-card">
+
+    <ion-card-content>
+
+      <!-- HEADER -->
+      <div class="task-header">
+
+        <div>
+
+          <h2>{{ task.title }}</h2>
+
+          <div class="professional">
+
+            <ion-avatar>
+              <div class="avatar-text">
+                {{ task.professional[0] }}
+              </div>
+            </ion-avatar>
+
+            <span>{{ task.professional }}</span>
+
+          </div>
+
+        </div>
+
+        <div
+          class="difficulty"
+          [ngClass]="getDifficultyClass(task.difficulty)">
+
+          {{ task.difficulty }}
+
+        </div>
+
+      </div>
+
+      <!-- DESCRIPTION -->
+      <p class="description">
+        {{ task.description }}
+      </p>
+
+      <!-- INFO -->
+      <div class="info-row">
+
+        <div class="info-item">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ task.duration }}</span>
+        </div>
+
+        <div class="info-item">
+          <ion-icon name="star"></ion-icon>
+          <span>{{ task.rating }}</span>
+        </div>
+
+      </div>
+
+      <!-- TECHNOLOGIES -->
+      <div class="tech-container">
+
+        <div
+          class="tech-badge"
+          *ngFor="let tech of task.technologies">
+
+          {{ tech }}
+
+        </div>
+
+      </div>
+
+      <!-- BUTTON -->
+      <ion-button expand="block">
+        Ver Desafio
+      </ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- EMPTY -->
+  <div
+    class="empty-state"
+    *ngIf="filteredTasks.length === 0">
+
+    <ion-icon name="search-outline"></ion-icon>
+
+    <p>Nenhum desafio encontrado</p>
+
+  </div>
+
 </ion-content>
