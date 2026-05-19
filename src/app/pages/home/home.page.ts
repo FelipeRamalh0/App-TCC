@@ -2,95 +2,147 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../services/auth';
+
+import {
+  Firestore,
+  collection,
+  collectionData
+} from '@angular/fire/firestore';
 
 interface Task {
-  id: number;
-  title: string;
-  professional: string;
-  difficulty: 'Iniciante' | 'Intermediário' | 'Avançado';
-  technologies: string[];
-  description: string;
-  duration: string;
-  rating: number;
-}
+  id?: string;
 
+  titulo: string;
+
+  descricao: string;
+
+  dificuldade: 'Iniciante' | 'Intermediário' | 'Avançado';
+
+  tecnologias: string[];
+
+  dataCriacao?: any;
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-   imports: [
+  imports: [
     CommonModule,
     FormsModule,
     IonicModule
   ]
 })
+
 export class HomePage implements OnInit {
 
-  activeTab: string = 'home';
   searchQuery: string = '';
 
-  tasks: Task[] = [
-    {
-      id: 1,
-      title: 'Criar landing page responsiva',
-      professional: 'Ana Silva',
-      difficulty: 'Iniciante',
-      technologies: ['HTML', 'CSS', 'JavaScript'],
-      description: 'Desenvolva uma landing page moderna e responsiva para um produto digital',
-      duration: '2-3 horas',
-      rating: 4.8,
-    },
-    {
-      id: 2,
-      title: 'Sistema de autenticação com React',
-      professional: 'Carlos Santos',
-      difficulty: 'Intermediário',
-      technologies: ['React', 'TypeScript', 'Firebase'],
-      description: 'Implemente um sistema completo de login e cadastro com validações',
-      duration: '4-5 horas',
-      rating: 4.9,
-    },
-    {
-      id: 3,
-      title: 'API REST com Node.js',
-      professional: 'Marina Costa',
-      difficulty: 'Intermediário',
-      technologies: ['Node.js', 'Express', 'MongoDB'],
-      description: 'Construa uma API RESTful para gerenciamento de tarefas',
-      duration: '5-6 horas',
-      rating: 4.7,
-    },
-    {
-      id: 4,
-      title: 'Dashboard com gráficos',
-      professional: 'Pedro Oliveira',
-      difficulty: 'Avançado',
-      technologies: ['React', 'TypeScript', 'Recharts'],
-      description: 'Crie um dashboard interativo com visualização de dados em tempo real',
-      duration: '6-8 horas',
-      rating: 5.0,
-    },
-  ];
+  selectedDifficulty: string = 'Todos';
+
+  tasks: Task[] = [];
 
   filteredTasks: Task[] = [];
 
-  constructor() {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private firestore: Firestore
+  ) {}
 
   ngOnInit() {
-    this.filteredTasks = this.tasks;
+
+    this.carregarTarefas();
+
   }
+
+  // =========================
+  // LOGOUT
+  // =========================
+
+  async logout() {
+
+    try {
+
+      await this.authService.logout();
+
+      this.router.navigate(['/login']);
+
+    } catch (error) {
+
+      console.log('Erro ao sair', error);
+
+    }
+
+  }
+
+  // =========================
+  // CARREGAR TAREFAS
+  // =========================
+
+  carregarTarefas() {
+
+    const tarefasRef = collection(
+      this.firestore,
+      'tarefas'
+    );
+
+    collectionData(tarefasRef, {
+      idField: 'id'
+    }).subscribe((dados: any) => {
+
+      this.tasks = dados;
+
+      this.filteredTasks = dados;
+
+    });
+
+  }
+
+  // =========================
+  // FILTRO COMPLETO
+  // =========================
 
   filterTasks() {
 
-    this.filteredTasks = this.tasks.filter((task) =>
-      task.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      task.technologies.some((tech) =>
-        tech.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
-    );
+    let tarefasFiltradas = [...this.tasks];
+
+    // BUSCA
+    if (this.searchQuery.trim() !== '') {
+
+      const query = this.searchQuery.toLowerCase();
+
+      tarefasFiltradas = tarefasFiltradas.filter((task) =>
+
+        task.titulo.toLowerCase().includes(query) ||
+
+        task.tecnologias.some((tech) =>
+          tech.toLowerCase().includes(query)
+        )
+      );
+
+    }
+
+    // DIFICULDADE
+    if (this.selectedDifficulty !== 'Todos') {
+
+      tarefasFiltradas = tarefasFiltradas.filter(
+        task => task.dificuldade === this.selectedDifficulty
+      );
+
+    }
+
+    this.filteredTasks = tarefasFiltradas;
+
   }
+
+  // =========================
+  // CLASSE DIFICULDADE
+  // =========================
 
   getDifficultyClass(difficulty: string) {
 
@@ -107,9 +159,9 @@ export class HomePage implements OnInit {
 
       default:
         return '';
+
     }
-  }
 
   }
 
-
+}

@@ -3,13 +3,31 @@
   <!-- HEADER -->
   <div class="header">
 
-    <div class="logo-container">
+    <div class="header-top">
 
-      <div class="logo-icon">
-        <ion-icon name="code-slash-outline"></ion-icon>
+      <!-- LOGO -->
+      <div class="logo-container">
+
+        <div class="logo-icon">
+          <ion-icon name="code-slash-outline"></ion-icon>
+        </div>
+
+        <h1>First Step Dev</h1>
+
       </div>
 
-      <h1>First Step Dev</h1>
+      <!-- LOGOUT -->
+      <ion-button
+        fill="clear"
+        color="light"
+        (click)="logout()">
+
+        <ion-icon
+          slot="icon-only"
+          name="log-out-outline">
+        </ion-icon>
+
+      </ion-button>
 
     </div>
 
@@ -20,7 +38,32 @@
       (ionInput)="filterTasks()"
       color="dark"
       animated="true">
+
     </ion-searchbar>
+
+    <!-- FILTER -->
+    <ion-segment
+      [(ngModel)]="selectedDifficulty"
+      (ionChange)="filterTasks()"
+      scrollable="true">
+
+      <ion-segment-button value="Todos">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="Iniciante">
+        <ion-label>Iniciante</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="Intermediário">
+        <ion-label>Intermediário</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button value="Avançado">
+        <ion-label>Avançado</ion-label>
+      </ion-segment-button>
+
+    </ion-segment>
 
   </div>
 
@@ -35,51 +78,16 @@
 
   </div>
 
-  <!-- STATS -->
-  <div class="stats-grid">
-
-    <ion-card class="stat-card blue">
-      <ion-card-content>
-
-        <h1>12</h1>
-
-        <p>Concluídos</p>
-
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card class="stat-card purple">
-      <ion-card-content>
-
-        <h1>3</h1>
-
-        <p>Em progresso</p>
-
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card class="stat-card dark">
-      <ion-card-content>
-
-        <h1>45</h1>
-
-        <p>Pontos</p>
-
-      </ion-card-content>
-    </ion-card>
-
-  </div>
-
-  <!-- TASKS -->
+  <!-- SECTION -->
   <div class="section-title">
 
     <h3>Desafios Disponíveis</h3>
 
-    <span>Ver todos</span>
+    <span>{{ filteredTasks.length }} tarefas</span>
 
   </div>
 
-  <!-- TASK CARD -->
+  <!-- TASKS -->
   <ion-card
     *ngFor="let task of filteredTasks"
     class="task-card">
@@ -91,27 +99,15 @@
 
         <div>
 
-          <h2>{{ task.title }}</h2>
+          <h2>{{ task.titulo }}</h2>
 
-          <div class="professional">
+          <div
+            class="difficulty"
+            [ngClass]="getDifficultyClass(task.dificuldade)">
 
-            <ion-avatar>
-              <div class="avatar-text">
-                {{ task.professional[0] }}
-              </div>
-            </ion-avatar>
-
-            <span>{{ task.professional }}</span>
+            {{ task.dificuldade }}
 
           </div>
-
-        </div>
-
-        <div
-          class="difficulty"
-          [ngClass]="getDifficultyClass(task.difficulty)">
-
-          {{ task.difficulty }}
 
         </div>
 
@@ -119,30 +115,17 @@
 
       <!-- DESCRIPTION -->
       <p class="description">
-        {{ task.description }}
+
+        {{ task.descricao }}
+
       </p>
-
-      <!-- INFO -->
-      <div class="info-row">
-
-        <div class="info-item">
-          <ion-icon name="time-outline"></ion-icon>
-          <span>{{ task.duration }}</span>
-        </div>
-
-        <div class="info-item">
-          <ion-icon name="star"></ion-icon>
-          <span>{{ task.rating }}</span>
-        </div>
-
-      </div>
 
       <!-- TECHNOLOGIES -->
       <div class="tech-container">
 
         <div
           class="tech-badge"
-          *ngFor="let tech of task.technologies">
+          *ngFor="let tech of task.tecnologias">
 
           {{ tech }}
 
@@ -152,7 +135,9 @@
 
       <!-- BUTTON -->
       <ion-button expand="block">
+
         Ver Desafio
+
       </ion-button>
 
     </ion-card-content>
@@ -166,7 +151,7 @@
 
     <ion-icon name="search-outline"></ion-icon>
 
-    <p>Nenhum desafio encontrado</p>
+    <p>Nenhuma tarefa encontrada</p>
 
   </div>
 

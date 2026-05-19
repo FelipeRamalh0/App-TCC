@@ -1,0 +1,96 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="header">
+
+    <h1>Criar Tarefa</h1>
+
+    <p>Publique um novo desafio para os aprendizes</p>
+
+  </div>
+
+  <ion-card>
+
+    <ion-card-content>
+
+      <!-- TITULO -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Título
+        </ion-label>
+
+        <ion-input
+          placeholder="Digite o título"
+          [(ngModel)]="titulo">
+        </ion-input>
+
+      </ion-item>
+
+      <!-- DESCRICAO -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Descrição
+        </ion-label>
+
+        <ion-textarea
+          placeholder="Descreva a tarefa"
+          [(ngModel)]="descricao">
+        </ion-textarea>
+
+      </ion-item>
+
+      <!-- DIFICULDADE -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Dificuldade
+        </ion-label>
+
+        <ion-select [(ngModel)]="dificuldade">
+
+          <ion-select-option value="Iniciante">
+            Iniciante
+          </ion-select-option>
+
+          <ion-select-option value="Intermediário">
+            Intermediário
+          </ion-select-option>
+
+          <ion-select-option value="Avançado">
+            Avançado
+          </ion-select-option>
+
+        </ion-select>
+
+      </ion-item>
+
+      <!-- TECNOLOGIAS -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Tecnologias
+        </ion-label>
+
+        <ion-input
+          placeholder="Ex: Angular, Firebase"
+          [(ngModel)]="tecnologias">
+        </ion-input>
+
+      </ion-item>
+
+      <!-- BOTAO -->
+      <ion-button
+        expand="block"
+        class="ion-margin-top"
+        (click)="criarTarefa()">
+
+        Criar Tarefa
+
+      </ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

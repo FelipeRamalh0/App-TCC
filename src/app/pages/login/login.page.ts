@@ -1,4 +1,3 @@
-import { DashboardPage } from './../dashboard/dashboard.page';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth';
 import { Router } from '@angular/router';
@@ -33,7 +32,7 @@ export class LoginPage {
   async login() {
     try {
       await this.authService.login(this.email, this.senha);
-      this.router.navigateByUrl('/DashboardPage');
+      this.router.navigateByUrl('/home');
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.presentToast('Erro ao logar: ' + error.message, 'danger')
@@ -46,7 +45,7 @@ export class LoginPage {
   async loginGoogle() {
     try {
       await this.authService.loginWithGoogle();
-      this.router.navigateByUrl('/DashboardPage');
+      this.router.navigateByUrl('/home');
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.presentToast('Erro ao logar com Google: ' + error.message, 'danger')
@@ -59,7 +58,7 @@ export class LoginPage {
   async loginGitHub() {
     try {
       await this.authService.loginWithGitHub();
-      this.router.navigateByUrl('/DashboardPage');
+      this.router.navigateByUrl('/home');
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.presentToast('Erro ao logar com Google: ' + error.message, 'danger')
