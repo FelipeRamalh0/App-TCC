@@ -25,8 +25,9 @@ const routes: Routes = [
   {
     path: 'home',
     loadComponent: () =>
-      import('./pages/home/home.page').then(m => m.HomePage)
-  },  {
+      import('./pages/editar-tarefa/editar-tarefa.page').then(m => m.HomePage)
+  },
+  {
     path: 'criar-tarefa',
     loadChildren: () => import('./pages/criar-tarefa/criar-tarefa.module').then( m => m.CriarTarefaPageModule)
   }
