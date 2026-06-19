@@ -25,34 +25,32 @@ const routes: Routes = [
   {
     path: 'home',
     loadComponent: () =>
-      import('./pages/editar-tarefa/editar-tarefa.page').then(m => m.HomePage)
+      import('./pages/home/tab1.page').then(m => m.Tab1Page)
   },
-  {
-    path: 'criar-tarefa',
-    loadChildren: () => import('./pages/criar-tarefa/criar-tarefa.module').then( m => m.CriarTarefaPageModule)
-  },  {
-    path: 'perfil',
-    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
-  },
-  {
-    path: 'criar-tarefa',
-    loadChildren: () => import('./pages/criar-tarefa/criar-tarefa.module').then( m => m.CriarTarefaPageModule)
-  },
-  {
-    path: 'editar-tarefa',
-    loadChildren: () => import('./pages/editar-tarefa/editar-tarefa.module').then( m => m.EditarTarefaPageModule)
-  },
-  {
-    path: 'detalhes-tarefa',
-    loadChildren: () => import('./pages/detalhes-tarefa/detalhes-tarefa.module').then( m => m.DetalhesTarefaPageModule)
-  },
-  {
-    path: 'entregas',
-    loadChildren: () => import('./pages/entregas/entregas.module').then( m => m.EntregasPageModule)
-  }
-
-
-
+ {
+  path: 'perfil',
+  loadComponent: () =>
+    import('./pages/perfil/perfil.page')
+      .then(m => m.PerfilPage)
+},
+{
+  path: 'criar-tarefa',
+  loadComponent: () =>
+    import('./pages/criar-tarefa/criar-tarefa.page')
+      .then(m => m.CriarTarefaPage)
+},
+{
+  path: 'editar-tarefa',
+  loadComponent: () =>
+    import('./pages/editar-tarefa/editar-tarefa.page')
+      .then(m => m.EditarTarefaPage)
+},
+{
+  path: 'detalhes-tarefa',
+  loadComponent: () =>
+    import('./pages/detalhes-tarefa/detalhes-tarefa.page')
+      .then(m => m.DetalhesTarefaPage)
+}
 ];
 
 @NgModule({

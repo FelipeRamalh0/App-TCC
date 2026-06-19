@@ -9,6 +9,7 @@ import {
 
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
+import { Usuario } from '../../services/usuario';
 
 @Component({
   selector: 'app-register',
@@ -28,14 +29,17 @@ export class RegisterPage {
   nome = '';
   email = '';
   senha = '';
-  tipo_usuario = '';
+  tipo_usuario = 'Aprendiz';
+  bio = '';
+  nivelExperiencia = 'Iniciante';
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController
-  ) {}
+     private authService: AuthService,
+  private usuarioService: Usuario,
+  private router: Router,
+  private toastCtrl: ToastController,
+  private loadingCtrl: LoadingController
+  ) { }
 
   async cadastrar() {
 
@@ -47,10 +51,29 @@ export class RegisterPage {
 
     try {
 
-      await this.authService.register(
-        this.email,
-        this.senha
-      );
+      const credencial = await this.authService.register(
+  this.email,
+  this.senha
+);
+
+await this.usuarioService.criarUsuario({
+
+  uid: credencial.user.uid,
+
+  nome: this.nome,
+
+  email: this.email,
+
+  tipoUsuario: this.tipo_usuario as
+    'Aprendiz' | 'Profissional',
+
+  bio: this.bio,
+
+  pontuacao: 0,
+
+  nivelExperiencia: this.nivelExperiencia
+
+});
 
       await loading.dismiss();
 

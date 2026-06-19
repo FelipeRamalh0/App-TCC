@@ -10,7 +10,17 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
   <form (ngSubmit)="cadastrar()">
+
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input
+        [(ngModel)]="nome"
+        name="nome"
+        required>
+      </ion-input>
+    </ion-item>
 
     <ion-item>
       <ion-label position="floating">Email</ion-label>
@@ -33,10 +43,60 @@
       </ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-label>Tipo de Usuário</ion-label>
+      <ion-select
+        [(ngModel)]="tipo_usuario"
+        name="tipo_usuario">
+
+        <ion-select-option value="Aprendiz">
+          Aprendiz
+        </ion-select-option>
+
+        <ion-select-option value="Profissional">
+          Profissional
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Bio</ion-label>
+      <ion-textarea
+        [(ngModel)]="bio"
+        name="bio">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Nível</ion-label>
+
+      <ion-select
+        [(ngModel)]="nivelExperiencia"
+        name="nivelExperiencia">
+
+        <ion-select-option value="Iniciante">
+          Iniciante
+        </ion-select-option>
+
+        <ion-select-option value="Basico">
+          Básico
+        </ion-select-option>
+
+        <ion-select-option value="Intermediario">
+          Intermediário
+        </ion-select-option>
+
+        <ion-select-option value="Avancado">
+          Avançado
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
     <ion-button
-      expand="full"
+      expand="block"
       type="submit"
-      [disabled]="!email || !senha || senha.length < 6"
       class="ion-margin-top">
 
       Cadastrar
@@ -44,4 +104,5 @@
     </ion-button>
 
   </form>
+
 </ion-content>

@@ -12,7 +12,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
 
 import { getFirestore, provideFirestore} from  '@angular/fire/firestore';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
