@@ -1,21 +1,21 @@
 export interface Tarefa {
+
   id?: string;
 
   titulo: string;
 
   descricao: string;
 
-  dificuldade: string;
+  categoria: string;
 
-  tecnologias: string[];
-
-  pontos: number;
+  nivelDificuldade: string;
 
   status: string;
 
-  criadoPor: string;
+  profissionalId: string;
 
-  dataCriacao: Date;
+  profissionalNome: string;
 
-  prazo: Date;
+  aprendizId?: string;
+
 }

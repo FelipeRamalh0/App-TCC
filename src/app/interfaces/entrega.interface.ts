@@ -1,15 +1,17 @@
 export interface Entrega {
+
   id?: string;
 
   tarefaId: string;
 
   aprendizId: string;
 
-  resposta: string;
+  repositorio: string;
 
-  status: string;
+  codigoTexto: string;
+
+  statusEntrega: string;
 
   feedback?: string;
 
-  dataEntrega: Date;
 }
