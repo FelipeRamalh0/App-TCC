@@ -1,15 +1,51 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Tarefas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
 
-  <h2>First Step Dev</h2>
+  <ion-card *ngFor="let tarefa of tarefas">
 
-  <p>
-    Bem-vindo à plataforma.
-  </p>
+    <ion-card-header>
+
+      <ion-card-title>
+        {{ tarefa.titulo }}
+      </ion-card-title>
+
+      <ion-card-subtitle>
+        {{ tarefa.categoria }}
+      </ion-card-subtitle>
+
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p>{{ tarefa.descricao }}</p>
+
+      <p>
+        Dificuldade:
+        {{ tarefa.nivelDificuldade }}
+      </p>
+
+      <p>
+        Status:
+        {{ tarefa.status }}
+      </p>
+
+    </ion-card-content>
+    <ion-button
+    *ngIf="
+    tipoUsuario === 'Aprendiz' &&
+    tarefa.status === 'aberta' "
+  expand="block"
+  color="success"
+  (click)="assumirTarefa(tarefa)">
+
+  Assumir Tarefa
+
+</ion-button>
+  </ion-card>
 
 </ion-content>

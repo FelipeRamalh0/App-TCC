@@ -1,17 +1,63 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Minhas Tarefas
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-card
+    *ngFor="let tarefa of tarefas">
+
+    <ion-card-header>
+
+      <ion-card-title>
+        {{ tarefa.titulo }}
+      </ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p>
+        {{ tarefa.descricao }}
+      </p>
+
+      <ion-chip color="success">
+        {{ tarefa.status }}
+      </ion-chip>
+<ion-button
+  *ngIf="tipoUsuario === 'Profissional'"
+  color="warning"
+  expand="block"
+  (click)="editarTarefa(tarefa.id)">
+
+  Editar
+
+</ion-button>
+<ion-button
+  *ngIf="tipoUsuario === 'Profissional'"
+  color="danger"
+  (click)="excluirTarefa(tarefa.id)">
+
+  Excluir
+
+</ion-button>
+<ion-button
+  *ngIf="
+    tipoUsuario === 'Aprendiz' &&
+    tarefa.status === 'em_andamento'
+  "
+  color="success"
+  (click)="enviarSolucao(tarefa.id)">
+
+  Enviar Solução
+
+</ion-button>
+    </ion-card-content>
+    
+  </ion-card>
+
 </ion-content>

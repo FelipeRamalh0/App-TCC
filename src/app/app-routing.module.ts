@@ -1,3 +1,4 @@
+import { Tab2Page } from './pages/minhas-tarefas/tab2.page';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -27,6 +28,11 @@ const routes: Routes = [
     loadComponent: () =>
       import('./pages/home/tab1.page').then(m => m.Tab1Page)
   },
+   {
+    path: 'minhas-tarefas',
+    loadComponent: () =>
+      import('./pages/minhas-tarefas/tab2.page').then(m => m.Tab2Page)
+  },
  {
   path: 'perfil',
   loadComponent: () =>
@@ -40,7 +46,7 @@ const routes: Routes = [
       .then(m => m.CriarTarefaPage)
 },
 {
-  path: 'editar-tarefa',
+  path: 'editar-tarefa/:id',
   loadComponent: () =>
     import('./pages/editar-tarefa/editar-tarefa.page')
       .then(m => m.EditarTarefaPage)
@@ -50,7 +56,11 @@ const routes: Routes = [
   loadComponent: () =>
     import('./pages/detalhes-tarefa/detalhes-tarefa.page')
       .then(m => m.DetalhesTarefaPage)
-}
+},  {
+    path: 'completar-cadastro',
+    loadChildren: () => import('./pages/completar-cadastro/completar-cadastro.module').then( m => m.CompletarCadastroPageModule)
+  },
+
 ];
 
 @NgModule({

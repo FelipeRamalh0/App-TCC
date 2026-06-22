@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Completar Cadastro
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+
+    <ion-label position="stacked">
+      Tipo de Usuário
+    </ion-label>
+
+    <ion-select
+      [(ngModel)]="tipoUsuario">
+
+      <ion-select-option value="Aprendiz">
+        Aprendiz
+      </ion-select-option>
+
+      <ion-select-option value="Profissional">
+        Profissional
+      </ion-select-option>
+
+    </ion-select>
+
+  </ion-item>
+
+  <ion-item>
+
+    <ion-label position="stacked">
+      Bio
+    </ion-label>
+
+    <ion-textarea
+      [(ngModel)]="bio">
+    </ion-textarea>
+
+  </ion-item>
+
+
+  <ion-button
+    expand="block"
+    class="ion-margin-top"
+    (click)="finalizarCadastro()">
+
+    Finalizar Cadastro
+
+  </ion-button>
+
+</ion-content>

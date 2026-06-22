@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, authState } from '@angular/fire/auth';
 import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
 @Injectable({
@@ -7,26 +7,35 @@ import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from
 })
 export class AuthService {
 
-  constructor(private auth: Auth){}
+  constructor(private auth: Auth,
+    private authService: AuthService
+  ){}
 
-  login( email: string, senha: string, ){
+  async login( email: string, senha: string, ){
     return signInWithEmailAndPassword(this.auth,  email, senha, );
   }
 
-  register(email: string, senha: string){
+  async register(email: string, senha: string){
     return createUserWithEmailAndPassword(this.auth, email, senha);
   }
-  logout(){
+  async logout(){
     return signOut(this.auth);
   }
 
-  loginWithGoogle(){
+  async loginWithGoogle(){
     const provider= new GoogleAuthProvider();
-    return signInWithPopup(this.auth, provider);
+    const credencial = await this.authService.loginWithGoogle();
+  return signInWithPopup(this.auth, provider);
   }
 
-  loginWithGitHub(){
+  async loginWithGitHub(){
     const provider= new GithubAuthProvider();
     return signInWithPopup(this.auth, provider)
   }
+   usuarioLogado() {
+  return authState(this.auth);
+}
+ usuarioAtual() {
+  return this.auth.currentUser;
+}
 }
