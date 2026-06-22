@@ -4,12 +4,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-button class="criar-btn" *ngIf="tipoUsuario === 'Profissional'" expand="block" (click)="criarTarefa()">
-
+<ion-content >
+  
+  <div class="btn-container">
+  <ion-button
+    class="criar-btn"
+    *ngIf="tipoUsuario === 'Profissional'"
+    expand="block"
+    (click)="criarTarefa()"
+  >
     + Criar Tarefa
-
   </ion-button>
+</div>
   <ion-card *ngFor="let tarefa of tarefas">
 
     <ion-card-header>
@@ -55,17 +61,5 @@
 
     </ion-button>
   </ion-card>
-  
-</ion-content>
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Tarefas</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-  <!-- conteúdo da página -->
 
 </ion-content>
-

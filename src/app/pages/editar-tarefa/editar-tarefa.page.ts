@@ -4,9 +4,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { FormsModule } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-
 import { ActivatedRoute, Router } from '@angular/router';
-import { tarefaService } from '../../services/tarefa';
+import { TarefaService } from '../../services/tarefa';
 
 @Component({
   selector: 'app-editar-tarefa',
@@ -28,7 +27,7 @@ export class EditarTarefaPage implements OnInit {
   nivelDificuldade = 'Facil';
 
   constructor(
-    private tarefaService: tarefaService,
+    private tarefaService: TarefaService,
     private route: ActivatedRoute,
     private router: Router,
     private toastCtrl: ToastController

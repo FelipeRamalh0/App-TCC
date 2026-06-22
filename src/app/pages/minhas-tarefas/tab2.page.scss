@@ -1,0 +1,71 @@
+ion-content {
+  --background: #0f172a;
+}
+
+ion-toolbar {
+  --background: #1e293b;
+  --color: white;
+}
+
+ion-title {
+  font-weight: 700;
+}
+
+ion-card {
+  background: #111827;
+  color: white;
+  margin: 16px;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+ion-card-title {
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* descrição */
+ion-card-content p {
+  color: #cbd5e1;
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+/* chip de status */
+ion-chip {
+  margin-top: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+  background: #1e293b;
+  color: #38bdf8;
+}
+
+/* bloco de entrega */
+ion-card-content div {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+}
+
+/* botões */
+ion-button {
+  margin: 8px 10px;
+  --border-radius: 12px;
+  font-weight: 600;
+}
+
+/* cores por ação */
+ion-button[color="success"] {
+  --background: #22c55e;
+}
+
+ion-button[color="danger"] {
+  --background: #ef4444;
+}
+
+ion-button[color="warning"] {
+  --background: #f59e0b;
+}

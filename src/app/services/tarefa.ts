@@ -14,12 +14,12 @@ import {
   serverTimestamp
 } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class tarefaService {
+export class TarefaService {
 
   constructor(
   private firestore: Firestore,
@@ -56,24 +56,21 @@ async criarTarefa(tarefa: any) {
 //-----------------------------
 //LISTAR TODAS AS TAREFAS
 //----------------------------
-listarTarefas() {
+ listarTarefas() {
 
-  const tarefasRef = collection(
-    this.firestore,
-    'tarefas'
-  );
+    const tarefasRef = collection(
+      this.firestore,
+      'tarefas'
+    );
 
-  const q = query(
-    tarefasRef,
-    where('status', '==', 'aberta')
-  );
+    const q = query(
+      tarefasRef,
+      where('status', '==', 'aberta')
+    );
 
-  return collectionData(
-    q,
-    { idField: 'id' }
-  );
+    return collectionData(q, { idField: 'id' });
+  }
 
-}
 
 //--------------------------------
 //Listar tarefas Profissional
@@ -124,11 +121,12 @@ async assumirTarefa(
       aprendizId: usuario.uid,
       status: 'em_andamento'
     }
-  );
+  )
+}
 //-------------------------
 //LISTAR MINHAS TAREFAS
 //------------------------
-}
+
 
 listarMinhasTarefas(uid: string) {
 

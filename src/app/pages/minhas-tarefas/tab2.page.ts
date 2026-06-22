@@ -2,7 +2,7 @@ import { AuthService } from 'src/app/services/auth';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { tarefaService } from 'src/app/services/tarefa';
+import { TarefaService } from 'src/app/services/tarefa';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
@@ -24,7 +24,7 @@ export class Tab2Page {
   tarefas: any[] = [];
   tipoUsuario = '';
   constructor(
-    private tarefaService: tarefaService,
+    private tarefaService: TarefaService,
     private authService: AuthService,
     private entregaService: Entrega,
     private usuarioService: Usuario,

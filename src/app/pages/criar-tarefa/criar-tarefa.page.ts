@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { tarefaService } from 'src/app/services/tarefa';
+import { TarefaService } from 'src/app/services/tarefa';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-criar-tarefa',
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class CriarTarefaPage implements OnInit {
 
-  constructor(private tarefaService: tarefaService,
+  constructor(private tarefaService: TarefaService,
     private router: Router
   ) { }
 ngOnInit() {}

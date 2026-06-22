@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { tarefaService } from '../../services/tarefa';
+import { TarefaService } from '../../services/tarefa';
 import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
+
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -11,17 +12,18 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule,
-    RouterLink
+    IonicModule
   ]
 })
 export class Tab1Page {
 
-  constructor(private tarefaService: tarefaService,
+  constructor(private tarefaService: TarefaService,
     private router: Router
   ) {}
 tipoUsuario = '';
 tarefas: any[] = [];
+
+
 
 ngOnInit() {
   
@@ -29,8 +31,6 @@ ngOnInit() {
   const usuario = JSON.parse(
     localStorage.getItem('usuario') || '{}'
   );
-
-
   this.tipoUsuario = usuario.tipoUsuario;
 
   console.log('Tipo:', this.tipoUsuario);
@@ -63,7 +63,8 @@ async assumirTarefa(tarefa: any) {
 
 }
 async criarTarefa(){
-this.router.navigateByUrl("/criar-tarefa")
+  
+this.router.navigateByUrl("criar-tarefa")
 }
 
 }

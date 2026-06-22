@@ -51,8 +51,7 @@ export class LoginPage {
         JSON.stringify(usuario)
       );
 
-      this.router.navigateByUrl('/tabs/home');
-
+this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.presentToast('Erro ao logar: ' + error.message, 'danger')
@@ -81,8 +80,7 @@ export class LoginPage {
         JSON.stringify(usuario)
       );
 
-      this.router.navigateByUrl('/tabs/home');
-
+this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
       return;
 
     }
@@ -129,8 +127,7 @@ export class LoginPage {
             JSON.stringify(usuario)
           );
 
-          this.router.navigateByUrl('/tabs/home');
-
+this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
           return;
         }
 

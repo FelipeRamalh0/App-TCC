@@ -101,3 +101,9 @@ ion-button {
   font-size: 13px;
 
 }
+
+.btn-container {
+  padding: 16px;
+  position: relative;
+  z-index: 10;
+}
