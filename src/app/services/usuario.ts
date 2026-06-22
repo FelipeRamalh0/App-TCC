@@ -5,7 +5,12 @@ import {
   doc,
   setDoc,
   getDoc,
-  updateDoc
+  updateDoc,
+  collection,
+  collectionData,
+  query,
+  orderBy,
+  where
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -64,6 +69,53 @@ export class Usuario {
       dados
     );
   }
+
+async adicionarPontos(
+  uid: string,
+  pontos: number
+) {
+
+  const usuarioRef = doc(
+    this.firestore,
+    `usuarios/${uid}`
+  );
+
+  const snapshot =
+    await getDoc(usuarioRef);
+
+  const usuario =
+    snapshot.data();
+
+  await updateDoc(
+    usuarioRef,
+    {
+      pontuacao:
+        (usuario?.['pontuacao'] || 0)
+        + pontos
+    }
+  );
+
+}
+
+listarRanking() {
+
+  const usuariosRef = collection(
+    this.firestore,
+    'usuarios'
+  );
+
+ const q = query(
+  usuariosRef,
+  where('tipoUsuario', '==', 'Aprendiz'),
+  orderBy('pontuacao', 'desc')
+);
+
+  return collectionData(
+    q,
+    { idField: 'id' }
+  );
+
+}
 
 }
 

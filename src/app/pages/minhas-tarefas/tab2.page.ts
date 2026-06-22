@@ -5,7 +5,9 @@ import { IonicModule } from '@ionic/angular';
 import { tarefaService } from 'src/app/services/tarefa';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-
+import { RouterLink } from '@angular/router';
+import { Entrega } from 'src/app/services/entrega';
+import { Usuario } from 'src/app/services/usuario';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -13,7 +15,8 @@ import { AlertController } from '@ionic/angular';
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    RouterLink
   ]
 })
 export class Tab2Page {
@@ -23,39 +26,95 @@ export class Tab2Page {
   constructor(
     private tarefaService: tarefaService,
     private authService: AuthService,
+    private entregaService: Entrega,
+    private usuarioService: Usuario,
     private router: Router,
     private alertCtrl: AlertController
   ) { }
 
   ngOnInit() {
-    const usuario = JSON.parse(
-      localStorage.getItem('usuario') || '{}'
-    );
+    
+  const usuario = JSON.parse(
+    localStorage.getItem('usuario') || '{}'
+  );
 
-    this.tipoUsuario = usuario.tipo_usuario;
+  this.tipoUsuario = usuario.tipoUsuario;
 
-    this.carregarTarefas();
+  this.carregarTarefas();
 
   }
+
+  //-----------------------------
+  //CARREGAR TAREFAS
+  //-----------------------------
   carregarTarefas() {
 
-    this.authService
-      .usuarioLogado()
-      .subscribe(usuario => {
+  const usuario = JSON.parse(
+    localStorage.getItem('usuario') || '{}'
+  );
 
-        if (!usuario) return;
+  console.log('Usuário LocalStorage:', usuario);
+
+  this.authService
+    .usuarioLogado()
+    .subscribe(authUser => {
+
+      if (!authUser) return;
+
+      console.log('UID Firebase:', authUser.uid);
+
+      if (usuario.tipoUsuario === 'Profissional') {
+
+        console.log('Entrou como PROFISSIONAL');
 
         this.tarefaService
-          .listarMinhasTarefas(usuario.uid)
+          .listarTarefasProfissional(authUser.uid)
           .subscribe(tarefas => {
+
+  this.tarefas = tarefas;
+
+  tarefas.forEach((tarefa: any) => {
+
+    this.entregaService
+      .listarEntregasPorTarefa(
+        tarefa.id
+      )
+      .subscribe(entregas => {
+
+        tarefa.entrega =
+          entregas[0];
+
+      });
+
+  });
+
+});
+
+      } else {
+
+        console.log('Entrou como APRENDIZ');
+
+        this.tarefaService
+          .listarMinhasTarefas(authUser.uid)
+          .subscribe(tarefas => {
+
+            console.log(
+              'Tarefas do aprendiz:',
+              tarefas
+            );
 
             this.tarefas = tarefas;
 
           });
 
-      });
+      }
 
-  }
+    });
+
+}
+  //-------------------------
+  //EDITAR
+  //-----------------------
   editarTarefa(id: string) {
     console.log(id);
     this.router.navigate([
@@ -64,6 +123,10 @@ export class Tab2Page {
     ]);
 
   }
+
+  //-----------------------
+  //EXCLUIR
+  //-----------------------
   async excluirTarefa(id: string) {
 
     try {
@@ -79,6 +142,10 @@ export class Tab2Page {
     }
 
   }
+
+  //---------------------
+  //ENTREGAR
+  //---------------------
  async enviarSolucao(id: string) {
 
   const alert = await this.alertCtrl.create({
@@ -118,7 +185,7 @@ export class Tab2Page {
             await this.tarefaService.enviarEntrega(
 
               id,
-
+              
               dados.github,
 
               dados.codigo
@@ -144,6 +211,74 @@ export class Tab2Page {
   await alert.present();
 
 }
+
+//----------------------
+//APROVAR ENTREGA
+//---------------------
+async aprovarEntrega(
+  tarefa: any
+) {
+
+  try {
+
+    await this.tarefaService
+      .aprovarTarefa(
+        tarefa.id
+      );
+
+    if (tarefa.entrega) {
+
+      await this.entregaService
+        .aprovarEntrega(
+          tarefa.entrega.id
+        );
+
+      await this.usuarioService
+        .adicionarPontos(
+          tarefa.entrega.aprendizId,
+          100
+        );
+
+    }
+
+  } catch (erro) {
+
+    console.log(erro);
+
+  }
+
+}
+
+//-------------------------
+//REPROVAR ENTREGA
+//------------------------
+async reprovarEntrega(tarefa: any) {
+
+  try {
+
+    await this.tarefaService
+      .rejeitarTarefa(
+        tarefa.id
+      );
+
+    if (tarefa.entrega) {
+
+      await this.entregaService
+        .rejeitarEntrega(
+          tarefa.entrega.id
+        );
+
+    }
+
+  } catch (erro) {
+
+    console.log(erro);
+
+  }
+
+}
+
+
 }
 
 

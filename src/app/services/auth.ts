@@ -7,8 +7,7 @@ import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from
 })
 export class AuthService {
 
-  constructor(private auth: Auth,
-    private authService: AuthService
+  constructor(private auth: Auth
   ){}
 
   async login( email: string, senha: string, ){
@@ -24,7 +23,6 @@ export class AuthService {
 
   async loginWithGoogle(){
     const provider= new GoogleAuthProvider();
-    const credencial = await this.authService.loginWithGoogle();
   return signInWithPopup(this.auth, provider);
   }
 

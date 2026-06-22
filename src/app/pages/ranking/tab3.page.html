@@ -1,17 +1,73 @@
-<ion-header [translucent]="true">
+<ion-content [fullscreen]="true">
+ 
+<ion-header>
+
   <ion-toolbar>
+
     <ion-title>
-      Tab 3
+      Ranking
     </ion-title>
+
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-card
+    *ngFor="
+      let usuario of ranking;
+      let i = index
+    ">
+
+    <ion-card-content>
+
+      <h2>
+
+        #{{ i + 1 }}
+
+        {{ usuario.nome }}
+
+      </h2>
+
+      <p>
+
+        {{ usuario.pontuacao }}
+        pontos
+
+      </p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
+
+
+
+
+
+  <ion-footer>
+
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+
+      <ion-button routerLink="/home">
+        Home
+      </ion-button>
+
+      <ion-button routerLink="/minhas-tarefas">
+        Tarefas
+      </ion-button>
+
+      <ion-button routerLink="/ranking">
+        Ranking
+      </ion-button>
+
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-footer>
 </ion-content>

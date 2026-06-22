@@ -1,3 +1,4 @@
+import { Usuario } from './../../services/usuario';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth';
 import { Router } from '@angular/router';
@@ -13,11 +14,11 @@ import { IonicModule } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-  CommonModule,
-  FormsModule,
-  RouterLink,
-  IonicModule
-]
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    IonicModule
+  ]
 })
 export class LoginPage {
 
@@ -25,14 +26,33 @@ export class LoginPage {
   senha = '';
   constructor(
     private authService: AuthService,
+    private usuarioService: Usuario,
     private router: Router,
     private toastController: ToastController
   ) { }
 
   async login() {
+
     try {
-      await this.authService.login(this.email, this.senha);
+
+      const credencial =
+        await this.authService.login(
+          this.email,
+          this.senha
+        );
+
+      const usuario =
+        await this.usuarioService.buscarUsuario(
+          credencial.user.uid
+        );
+
+      localStorage.setItem(
+        'usuario',
+        JSON.stringify(usuario)
+      );
+
       this.router.navigateByUrl('/home');
+
     } catch (error: unknown) {
       if (error instanceof Error) {
         this.presentToast('Erro ao logar: ' + error.message, 'danger')
@@ -43,37 +63,100 @@ export class LoginPage {
   }
 
   async loginGoogle() {
-    try {
-      await this.authService.loginWithGoogle();
-      this.router.navigateByUrl('/home');
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        this.presentToast('Erro ao logar com Google: ' + error.message, 'danger')
-      } else {
-        this.presentToast('Erro desconehcido ao logar com Google', 'danger');
-      }
-    }
-  }
 
-  async loginGitHub() {
-    try {
-      await this.authService.loginWithGitHub();
+  try {
+
+    const credencial =
+      await this.authService.loginWithGoogle();
+
+    const usuario =
+      await this.usuarioService.buscarUsuario(
+        credencial.user.uid
+      );
+
+    if (usuario) {
+
+      localStorage.setItem(
+        'usuario',
+        JSON.stringify(usuario)
+      );
+
       this.router.navigateByUrl('/home');
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        this.presentToast('Erro ao logar com Google: ' + error.message, 'danger')
-      } else {
-        this.presentToast('Erro desconehcido ao logar com Google', 'danger');
-      }
+
+      return;
+
     }
-  }
-  async presentToast(mensagem: string, cor: string){
-    const toast= await this.toastController.create({
-      message: mensagem,
-      color: cor,
-      duration: 2000
-    });
-    toast.present();
+
+    this.router.navigateByUrl(
+      '/completar-cadastro'
+    );
+
+  } catch (error: unknown) {
+
+    if (error instanceof Error) {
+
+      this.presentToast(
+        'Erro ao logar com Google: ' +
+        error.message,
+        'danger'
+      );
+
+    } else {
+
+      this.presentToast(
+        'Erro desconhecido ao logar com Google',
+        'danger'
+      );
+
+    }
+
   }
 
 }
+
+  async loginGitHub() {
+      try {
+        const credencial = await this.authService.loginWithGitHub();
+        const usuario =
+          await this.usuarioService.buscarUsuario(
+            credencial.user.uid
+          );
+
+        if (usuario) {
+
+          localStorage.setItem(
+            'usuario',
+            JSON.stringify(usuario)
+          );
+
+          this.router.navigateByUrl('/home');
+
+          return;
+        }
+
+        this.router.navigateByUrl(
+          '/completar-cadastro'
+        );
+
+
+
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          this.presentToast('Erro ao logar com Google: ' + error.message, 'danger')
+        } else {
+          this.presentToast('Erro desconehcido ao logar com Google', 'danger');
+        }
+      }
+    }
+  
+  async presentToast(mensagem: string, cor: string) {
+      const toast = await this.toastController.create({
+        message: mensagem,
+        color: cor,
+        duration: 2000
+      });
+      toast.present();
+
+    }
+  }
+

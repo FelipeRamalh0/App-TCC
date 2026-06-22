@@ -28,6 +28,13 @@ export class tarefaService {
   
 async criarTarefa(tarefa: any) {
 
+   const usuario = this.auth.currentUser;
+
+
+  if (!usuario) {
+    throw new Error('Usuário não autenticado');
+  }
+
   const tarefasRef = collection(
     this.firestore,
     'tarefas'
@@ -36,6 +43,10 @@ async criarTarefa(tarefa: any) {
   return addDoc(tarefasRef, {
 
     ...tarefa,
+
+    profissionalId: usuario.uid,
+
+    status: 'aberta',
 
     createdAt: serverTimestamp()
 
@@ -63,6 +74,30 @@ listarTarefas() {
   );
 
 }
+
+//--------------------------------
+//Listar tarefas Profissional
+//--------------------------------
+listarTarefasProfissional(uid: string) {
+
+  const tarefasRef = collection(
+    this.firestore,
+    'tarefas'
+  );
+
+  const q = query(
+    tarefasRef,
+    where('profissionalId', '==', uid)
+  );
+
+  return collectionData(
+    q,
+    { idField: 'id' }
+  );
+
+}
+
+
 //-----------------------
 //ASSUMIR TAREFA
 //------------------------
@@ -201,12 +236,16 @@ async enviarEntrega(
     this.firestore,
     'entregas'
   );
-
+const user = JSON.parse(
+  localStorage.getItem('usuario') || '{}'
+);
   await addDoc(entregasRef, {
 
     tarefaId,
 
     aprendizId: usuario.uid,
+
+    aprendizNome: user.nome,
 
     github,
 
@@ -231,4 +270,48 @@ async enviarEntrega(
   );
 
 }
+
+//---------------------
+//APROVAR ENTREGA
+//--------------------
+
+async aprovarTarefa(
+  idTarefa: string
+) {
+
+  const tarefaRef = doc(
+    this.firestore,
+    `tarefas/${idTarefa}`
+  );
+
+  await updateDoc(
+    tarefaRef,
+    {
+      status: 'concluida'
+    }
+  );
+
+}
+
+//----------------------
+//REJEITAR ENTREGA
+//----------------------
+async rejeitarTarefa(idTarefa: string) {
+
+  const tarefaRef = doc(
+    this.firestore,
+    `tarefas/${idTarefa}`
+  );
+
+  return updateDoc(
+    tarefaRef,
+    {
+      status: 'em_andamento'
+    }
+  );
+
+}
+
+
+
 }

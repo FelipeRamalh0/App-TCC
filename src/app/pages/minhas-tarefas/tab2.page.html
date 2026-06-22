@@ -8,8 +8,7 @@
 
 <ion-content>
 
-  <ion-card
-    *ngFor="let tarefa of tarefas">
+  <ion-card *ngFor="let tarefa of tarefas">
 
     <ion-card-header>
 
@@ -28,36 +27,86 @@
       <ion-chip color="success">
         {{ tarefa.status }}
       </ion-chip>
-<ion-button
-  *ngIf="tipoUsuario === 'Profissional'"
-  color="warning"
-  expand="block"
-  (click)="editarTarefa(tarefa.id)">
 
-  Editar
+      <div *ngIf="tarefa.entrega &&
+tipoUsuario=== 'Profissional'">
 
-</ion-button>
-<ion-button
-  *ngIf="tipoUsuario === 'Profissional'"
-  color="danger"
-  (click)="excluirTarefa(tarefa.id)">
+        <p>
+          <strong>Aprendiz:</strong>
+          {{ tarefa.entrega.aprendizNome }}
+        </p>
 
-  Excluir
+        <p>
+          <strong>Solução:</strong>
+          {{ tarefa.entrega.codigo }}
+        </p>
+        <p>
+          <strong>Link da solução:</strong>
+          {{ tarefa.entrega.github }}
+        </p>
 
-</ion-button>
-<ion-button
-  *ngIf="
+      </div>
+
+      <ion-button *ngIf="
+    tipoUsuario === 'Profissional' &&
+    tarefa.status === 'em_revisao'
+  " color="success" expand="block" (click)="aprovarEntrega(tarefa)">
+
+        Aprovar
+
+      </ion-button>
+
+      <ion-button *ngIf="
+    tipoUsuario === 'Profissional' &&
+    tarefa.status === 'em_revisao'
+  " color="danger" expand="block" (click)="reprovarEntrega(tarefa)">
+
+        Reprovar
+
+      </ion-button>
+      <ion-button *ngIf="tipoUsuario === 'Profissional'" color="warning" (click)="editarTarefa(tarefa.id)">
+
+        Editar
+
+      </ion-button>
+
+      <ion-button *ngIf="tipoUsuario === 'Profissional'" color="danger" (click)="excluirTarefa(tarefa.id)">
+
+        Excluir
+
+      </ion-button>
+      <ion-button *ngIf="
     tipoUsuario === 'Aprendiz' &&
     tarefa.status === 'em_andamento'
-  "
-  color="success"
-  (click)="enviarSolucao(tarefa.id)">
+  " color="success" (click)="enviarSolucao(tarefa.id)">
 
-  Enviar Solução
+        Enviar Solução
 
-</ion-button>
+      </ion-button>
     </ion-card-content>
-    
-  </ion-card>
 
+  </ion-card>
+  <ion-footer>
+
+    <ion-toolbar>
+
+      <ion-buttons slot="start">
+
+        <ion-button routerLink="/home">
+          Home
+        </ion-button>
+
+        <ion-button routerLink="/minhas-tarefas">
+          Tarefas
+        </ion-button>
+
+        <ion-button routerLink="/ranking">
+          Ranking
+        </ion-button>
+
+      </ion-buttons>
+
+    </ion-toolbar>
+
+  </ion-footer>
 </ion-content>

@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { RouterLink } from '@angular/router';
+
+import { Usuario } from 'src/app/services/usuario';
 
 @Component({
   selector: 'app-tab3',
@@ -9,11 +12,28 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    RouterLink
   ]
 })
 export class Tab3Page {
 
-  constructor() {}
+ranking: any[] = [];
+
+  constructor( private usuarioService: Usuario) {}
+
+ ngOnInit() {
+
+    this.usuarioService
+      .listarRanking()
+      .subscribe(usuarios => {
+
+        this.ranking = usuarios;
+
+      });
+
+  }
 
 }
+
+

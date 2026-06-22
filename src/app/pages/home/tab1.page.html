@@ -5,7 +5,11 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-button
+    *ngIf="tipoUsuario === 'Profissional'"
+  (click)="criarTarefa()">
+  Criar Tarefa
+</ion-button>
   <ion-card *ngFor="let tarefa of tarefas">
 
     <ion-card-header>
@@ -35,6 +39,7 @@
       </p>
 
     </ion-card-content>
+   
     <ion-button
     *ngIf="
     tipoUsuario === 'Aprendiz' &&
@@ -47,5 +52,27 @@
 
 </ion-button>
   </ion-card>
+<ion-footer>
 
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+
+      <ion-button routerLink="/home">
+        Home
+      </ion-button>
+
+      <ion-button routerLink="/minhas-tarefas">
+        Tarefas
+      </ion-button>
+
+      <ion-button routerLink="/ranking">
+        Ranking
+      </ion-button>
+
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-footer>
 </ion-content>

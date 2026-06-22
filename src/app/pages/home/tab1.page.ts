@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { tarefaService } from '../../services/tarefa';
-
+import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -10,21 +11,29 @@ import { tarefaService } from '../../services/tarefa';
   standalone: true,
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    RouterLink
   ]
 })
 export class Tab1Page {
 
-  constructor(private tarefaService: tarefaService) {}
+  constructor(private tarefaService: tarefaService,
+    private router: Router
+  ) {}
 tipoUsuario = '';
 tarefas: any[] = [];
 
 ngOnInit() {
-  const usuario = JSON.parse(
-  localStorage.getItem('usuario') || '{}'
-);
+  
 
-this.tipoUsuario = usuario.tipoUsuario;
+  const usuario = JSON.parse(
+    localStorage.getItem('usuario') || '{}'
+  );
+
+
+  this.tipoUsuario = usuario.tipoUsuario;
+
+  console.log('Tipo:', this.tipoUsuario);
 
   this.tarefaService
     .listarTarefas()
@@ -32,10 +41,7 @@ this.tipoUsuario = usuario.tipoUsuario;
 
       this.tarefas = dados;
 
-      console.log(dados);
-
     });
-
 }
 async assumirTarefa(tarefa: any) {
 
@@ -55,6 +61,9 @@ async assumirTarefa(tarefa: any) {
 
   }
 
+}
+async criarTarefa(){
+this.router.navigateByUrl("/criar-tarefa")
 }
 
 }

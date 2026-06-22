@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
@@ -9,33 +10,33 @@ const routes: Routes = [
     children: [
       {
         path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        loadComponent: () => import('../criar-tarefa/criar-tarefa.page').then(m => m.CriarTarefaPage)
       },
       {
         path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        loadComponent: () => import('../minhas-tarefas/tab2.page').then(m => m.Tab2Page)
       },
       {
         path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        loadComponent: () => import('../ranking/tab3.page').then(m => m.Tab3Page)
       },
 
       {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'tab1',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('../pages/login/login.module').then(m => m.LoginPageModule)
+    loadComponent: () =>
+      import('../login/login.page').then(m => m.LoginPage)
   },
   {
     path: 'register',
-    loadChildren: () =>
-      import('../pages/register/register.module').then(m => m.RegisterPageModule)
+    loadComponent: () =>
+      import('../register/register.page').then(m => m.RegisterPage)
   },
   {
     path: '',

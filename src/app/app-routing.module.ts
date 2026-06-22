@@ -34,10 +34,10 @@ const routes: Routes = [
       import('./pages/minhas-tarefas/tab2.page').then(m => m.Tab2Page)
   },
  {
-  path: 'perfil',
+  path: 'ranking',
   loadComponent: () =>
-    import('./pages/perfil/perfil.page')
-      .then(m => m.PerfilPage)
+    import('./pages/ranking/tab3.page')
+      .then(m => m.Tab3Page)
 },
 {
   path: 'criar-tarefa',
@@ -56,9 +56,10 @@ const routes: Routes = [
   loadComponent: () =>
     import('./pages/detalhes-tarefa/detalhes-tarefa.page')
       .then(m => m.DetalhesTarefaPage)
-},  {
+},
+  {
     path: 'completar-cadastro',
-    loadChildren: () => import('./pages/completar-cadastro/completar-cadastro.module').then( m => m.CompletarCadastroPageModule)
+    loadComponent: () => import('./pages/completar-cadastro/completar-cadastro.page').then( m => m.CompletarCadastroPage)
   },
 
 ];
