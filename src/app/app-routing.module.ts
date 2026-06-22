@@ -22,23 +22,6 @@ const routes: Routes = [
       import('./pages/register/register.page').then(m => m.RegisterPage)
   },
 
-
-  {
-    path: 'home',
-    loadComponent: () =>
-      import('./pages/home/tab1.page').then(m => m.Tab1Page)
-  },
-   {
-    path: 'minhas-tarefas',
-    loadComponent: () =>
-      import('./pages/minhas-tarefas/tab2.page').then(m => m.Tab2Page)
-  },
- {
-  path: 'ranking',
-  loadComponent: () =>
-    import('./pages/ranking/tab3.page')
-      .then(m => m.Tab3Page)
-},
 {
   path: 'criar-tarefa',
   loadComponent: () =>
@@ -61,6 +44,12 @@ const routes: Routes = [
     path: 'completar-cadastro',
     loadComponent: () => import('./pages/completar-cadastro/completar-cadastro.page').then( m => m.CompletarCadastroPage)
   },
+  {
+  path: 'tabs',
+  loadChildren: () =>
+    import('./pages/tabs/tabs.module')
+      .then(m => m.TabsPageModule)
+},
 
 ];
 

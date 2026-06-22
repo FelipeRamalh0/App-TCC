@@ -1,51 +1,47 @@
-
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
+
     children: [
+
       {
-        path: 'tab1',
-        loadComponent: () => import('../criar-tarefa/criar-tarefa.page').then(m => m.CriarTarefaPage)
+        path: 'home',
+        loadComponent: () =>
+          import('../home/tab1.page')
+            .then(m => m.Tab1Page)
       },
+
       {
-        path: 'tab2',
-        loadComponent: () => import('../minhas-tarefas/tab2.page').then(m => m.Tab2Page)
+        path: 'tarefas',
+        loadComponent: () =>
+          import('../minhas-tarefas/tab2.page')
+            .then(m => m.Tab2Page)
       },
+
       {
-        path: 'tab3',
-        loadComponent: () => import('../ranking/tab3.page').then(m => m.Tab3Page)
+        path: 'ranking',
+        loadComponent: () =>
+          import('../ranking/tab3.page')
+            .then(m => m.Tab3Page)
       },
 
       {
         path: '',
-        redirectTo: 'tab1',
+        redirectTo: 'home',
         pathMatch: 'full'
       }
+
     ]
-  },
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('../login/login.page').then(m => m.LoginPage)
-  },
-  {
-    path: 'register',
-    loadComponent: () =>
-      import('../register/register.page').then(m => m.RegisterPage)
-  },
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
-export class TabsPageRoutingModule { }
+export class TabsPageRoutingModule {}

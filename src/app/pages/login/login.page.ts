@@ -51,7 +51,7 @@ export class LoginPage {
         JSON.stringify(usuario)
       );
 
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/tabs/home');
 
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -81,7 +81,7 @@ export class LoginPage {
         JSON.stringify(usuario)
       );
 
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/tabs/home');
 
       return;
 
@@ -129,7 +129,7 @@ export class LoginPage {
             JSON.stringify(usuario)
           );
 
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/tabs/home');
 
           return;
         }
