@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-button
-    *ngIf="tipoUsuario === 'Profissional'"
-  (click)="criarTarefa()">
-  Criar Tarefa
-</ion-button>
+  <ion-button class="criar-btn" *ngIf="tipoUsuario === 'Profissional'" expand="block" (click)="criarTarefa()">
+
+    + Criar Tarefa
+
+  </ion-button>
   <ion-card *ngFor="let tarefa of tarefas">
 
     <ion-card-header>
@@ -34,29 +34,46 @@
       </p>
 
       <p>
+
         Status:
-        {{ tarefa.status }}
+
+        <span class="status">
+
+          {{ tarefa.status }}
+
+        </span>
+
       </p>
 
     </ion-card-content>
-   
-    <ion-button
-    *ngIf="
+
+    <ion-button *ngIf="
     tipoUsuario === 'Aprendiz' &&
-    tarefa.status === 'aberta' "
-  expand="block"
-  color="success"
-  (click)="assumirTarefa(tarefa)">
+    tarefa.status === 'aberta' " expand="block" color="success" (click)="assumirTarefa(tarefa)">
 
-  Assumir Tarefa
+      Assumir Tarefa
 
-</ion-button>
+    </ion-button>
   </ion-card>
+  
+</ion-content>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tarefas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- conteúdo da página -->
+
+</ion-content>
+
 <ion-footer>
 
-  <ion-toolbar>
+  <ion-toolbar class="footer-nav">
 
-    <ion-buttons slot="start">
+    <ion-buttons>
 
       <ion-button routerLink="/home">
         Home
@@ -75,4 +92,3 @@
   </ion-toolbar>
 
 </ion-footer>
-</ion-content>
