@@ -28,6 +28,8 @@ ranking: any[] = [];
       .listarRanking()
       .subscribe(usuarios => {
 
+
+
         this.ranking = usuarios;
 
       });

@@ -19,6 +19,18 @@ const routes: Routes = [
     loadComponent: () =>
       import('./pages/register/register.page').then(m => m.RegisterPage)
   },
+  {
+  path: 'completar-cadastro',
+  loadComponent: () =>
+    import('./pages/completar-cadastro/completar-cadastro.page')
+      .then(m => m.CompletarCadastroPage)
+},
+{
+  path: 'criar-tarefa',
+  loadComponent: () =>
+    import('./pages/criar-tarefa/criar-tarefa.page')
+      .then(m => m.CriarTarefaPage)
+},
 
   {
     path: 'tabs',

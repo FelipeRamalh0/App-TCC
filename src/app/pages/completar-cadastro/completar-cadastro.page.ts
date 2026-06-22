@@ -28,7 +28,7 @@ export class CompletarCadastroPage  {
 
   bio = '';
 
-  nivelExperiencia = 'Iniciante';
+  nivelExperiencia = 'Aprendiz';
 
   constructor(
     private authService: AuthService,
@@ -85,7 +85,7 @@ export class CompletarCadastroPage  {
 
       await toast.present();
 
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/tabs/home');
 
     } catch (erro) {
 

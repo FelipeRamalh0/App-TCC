@@ -129,13 +129,9 @@ this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
 
 this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
           return;
-        }
-
-        this.router.navigateByUrl(
+        } else{this.router.navigateByUrl(
           '/completar-cadastro'
-        );
-
-
+        );}
 
       } catch (error: unknown) {
         if (error instanceof Error) {
@@ -145,7 +141,7 @@ this.router.navigateByUrl('/tabs/home', { replaceUrl: true });
         }
       }
     }
-  
+
   async presentToast(mensagem: string, cor: string) {
       const toast = await this.toastController.create({
         message: mensagem,

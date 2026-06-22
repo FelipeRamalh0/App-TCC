@@ -99,22 +99,15 @@ async adicionarPontos(
 
 listarRanking() {
 
-  const usuariosRef = collection(
-    this.firestore,
-    'usuarios'
+  const usuariosRef = collection(this.firestore, 'usuarios');
+
+  const q = query(
+    usuariosRef,
+    where('tipoUsuario', '==', 'Aprendiz'),
+    orderBy('pontuacao', 'desc')
   );
 
- const q = query(
-  usuariosRef,
-  where('tipoUsuario', '==', 'Aprendiz'),
-  orderBy('pontuacao', 'desc')
-);
-
-  return collectionData(
-    q,
-    { idField: 'id' }
-  );
-
+  return collectionData(q, { idField: 'id' });
 }
 
 }

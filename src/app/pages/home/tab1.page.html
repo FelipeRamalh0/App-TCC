@@ -5,17 +5,18 @@
 </ion-header>
 
 <ion-content >
-  
+
   <div class="btn-container">
   <ion-button
     class="criar-btn"
     *ngIf="tipoUsuario === 'Profissional'"
-    expand="block"
     (click)="criarTarefa()"
   >
     + Criar Tarefa
   </ion-button>
 </div>
+
+
   <ion-card *ngFor="let tarefa of tarefas">
 
     <ion-card-header>
@@ -40,26 +41,26 @@
       </p>
 
       <p>
-
         Status:
-
-        <span class="status">
-
-          {{ tarefa.status }}
-
-        </span>
-
+        {{ tarefa.status }}
       </p>
 
     </ion-card-content>
 
-    <ion-button *ngIf="
+    <ion-button
+    *ngIf="
     tipoUsuario === 'Aprendiz' &&
-    tarefa.status === 'aberta' " expand="block" color="success" (click)="assumirTarefa(tarefa)">
+    tarefa.status === 'aberta' "
+  expand="block"
+  color="success"
+  (click)="assumirTarefa(tarefa)">
 
-      Assumir Tarefa
+  Assumir Tarefa
 
-    </ion-button>
+</ion-button>
   </ion-card>
-
 </ion-content>
+
+
+
+

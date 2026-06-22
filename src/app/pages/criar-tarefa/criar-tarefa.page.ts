@@ -55,13 +55,13 @@ this.router.navigateByUrl("/home")
     console.error(error);
 
     alert(
-      'Erro ao criar tarefa:\n\n' 
+      'Erro ao criar tarefa:\n\n'
     );
 
   }
 
 }
 async voltar(){
-  this.router.navigateByUrl("/home")
+  this.router.navigateByUrl("/tabs/home")
 }
 }

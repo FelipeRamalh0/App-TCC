@@ -7,35 +7,23 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-   <div class="logo-area">
+<ion-item>
+  <ion-label position="floating">E-mail</ion-label>
+  <ion-input type="email" [(ngModel)]="email"></ion-input>
+</ion-item>
 
-    <h1>First Step Dev</h1>
+<ion-item>
+  <ion-label position="floating">Senha</ion-label>
+  <ion-input type="password" [(ngModel)]="senha"></ion-input>
+</ion-item>
 
-    <p>
-      Conectando iniciantes e profissionais
-    </p>
-
-  </div>
-
-  <div class="login-card">
-
-    <ion-item>
-    <ion-label position="floating">E-mail</ion-label>
-    <ion-input type="email" [(ngModel)]="email"></ion-input>
-    </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">Senha</ion-label>
-    <ion-input type="password" [(ngModel)]="senha"></ion-input>
-  </ion-item>
-
-  <ion-button expand="full" (click)="login()" class="ion-margin-top">Entrar</ion-button>
-  <ion-button expand="full" color="danger" (click)="loginGoogle()">Entrar com o Goole</ion-button>
-  <ion-button expand="full" color="primary" (click)="loginGitHub()">Entrar com o Git Hub</ion-button>
+<ion-button expand="full" (click)="login()" class="ion-margin-top">Entrar</ion-button>
+<ion-button expand="full" color="danger" (click)="loginGoogle()">Entrar com o Goole</ion-button>
+<ion-button expand="full" color="primary" (click)="loginGitHub()">Entrar com o Git Hub</ion-button>
 
 
   <ion-button expand="block" fill="clear" [routerLink]="['/register']">
-    Criar conta
-  </ion-button>
-</div>
+  Criar conta
+</ion-button>
+
 </ion-content>

@@ -1,80 +1,74 @@
-<ion-item>
-  <ion-button
-  (click)="voltar()">Voltar</ion-button>
-</ion-item>
+<ion-content>
 
+  <ion-toolbar>
+    <ion-title>Criar Tarefa</ion-title>
+  </ion-toolbar>
 
-<ion-item>
-  <ion-input
-    placeholder="Título"
-    [(ngModel)]="titulo">
-  </ion-input>
-</ion-item>
+  <div class="btn-container">
+    <ion-button fill="clear" (click)="voltar()">
+      ← Voltar
+    </ion-button>
+  </div>
 
-<ion-item>
-  
-  <ion-textarea
-    placeholder="Descrição"
-    [(ngModel)]="descricao">
-  </ion-textarea>
-</ion-item>
+  <ion-card>
 
-<ion-item>
-  <ion-label>Categoria</ion-label>
+    <ion-card-content>
 
-  <ion-select [(ngModel)]="categoria">
+      <ion-card-title>Criar nova tarefa</ion-card-title>
+      <ion-card-subtitle>Preencha os dados abaixo</ion-card-subtitle>
 
-    <ion-select-option value="Frontend">
-      Frontend
-    </ion-select-option>
+      <!-- Título -->
+      <ion-item lines="none">
+        <ion-input
+          placeholder="Título"
+          [(ngModel)]="titulo">
+        </ion-input>
+      </ion-item>
 
-    <ion-select-option value="Backend">
-      Backend
-    </ion-select-option>
+      <!-- Descrição -->
+      <ion-item lines="none">
+        <ion-textarea
+          placeholder="Descrição"
+          [(ngModel)]="descricao"
+          autoGrow="true">
+        </ion-textarea>
+      </ion-item>
 
-    <ion-select-option value="Mobile">
-      Mobile
-    </ion-select-option>
+      <!-- Categoria -->
+      <ion-item lines="none">
+        <ion-label>Categoria</ion-label>
+        <ion-select [(ngModel)]="categoria">
+          <ion-select-option value="Frontend">Frontend</ion-select-option>
+          <ion-select-option value="Backend">Backend</ion-select-option>
+          <ion-select-option value="Mobile">Mobile</ion-select-option>
+          <ion-select-option value="Banco de Dados">Banco de Dados</ion-select-option>
+          <ion-select-option value="UI/UX">UI/UX</ion-select-option>
+          <ion-select-option value="Full Stack">Full Stack</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-    <ion-select-option value="Banco de Dados">
-      Banco de Dados
-    </ion-select-option>
+      <!-- Dificuldade -->
+      <ion-item lines="none">
+        <ion-label>Dificuldade</ion-label>
+        <ion-select [(ngModel)]="nivelDificuldade">
+          <ion-select-option value="Facil">Fácil</ion-select-option>
+          <ion-select-option value="Medio">Médio</ion-select-option>
+          <ion-select-option value="Dificil">Difícil</ion-select-option>
+        </ion-select>
+      </ion-item>
 
-    <ion-select-option value="UI/UX">
-      UI/UX
-    </ion-select-option>
+      <!-- Botão -->
+      <ion-button
+        expand="block"
+        class="criar-btn"
+        (click)="criarTarefa()">
 
-    <ion-select-option value="Full Stack">
-      Full Stack
-    </ion-select-option>
+        Criar Tarefa
 
-  </ion-select>
-</ion-item>
+      </ion-button>
 
-<ion-item>
-  <ion-label>Nível de Dificuldade</ion-label>
+    </ion-card-content>
 
-  <ion-select [(ngModel)]="nivelDificuldade">
+  </ion-card>
 
-    <ion-select-option value="Facil">
-      Fácil
-    </ion-select-option>
-
-    <ion-select-option value="Medio">
-      Médio
-    </ion-select-option>
-
-    <ion-select-option value="Dificil">
-      Difícil
-    </ion-select-option>
-
-  </ion-select>
-</ion-item>
-
-<ion-button
-  expand="block"
-  (click)="criarTarefa()">
-
-  Criar Tarefa
-
-</ion-button>
+</ion-content>
